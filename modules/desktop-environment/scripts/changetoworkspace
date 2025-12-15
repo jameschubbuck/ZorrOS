@@ -1,3 +1,0 @@
-if ! hyprctl layers | grep -q "rofi"; then
-  hyprctl dispatch workspace $1
-fi

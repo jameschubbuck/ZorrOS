@@ -11,10 +11,6 @@
       generateCompletions = true;
       interactiveShellInit = ''
         set fish_greeting
-        # function fish_user_key_bindings
-        #   bind \t forward-char
-        #   bind \e\[C complete
-        end
       '';
       plugins = [
         {
