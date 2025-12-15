@@ -21,6 +21,7 @@
     blueman # Bluetooth manager
     libnotify # Send notifications
     kitty # Backup terminal
+    inkscape # Vector editor
   ];
   services.hardware.bolt.enable = true;
   programs.adb.enable = true;

@@ -30,7 +30,7 @@
           yaml.enable = true;
         };
         git.enable = true;
-        spellcheck.enable = false;
+        spellcheck.enable = true;
         lsp = {
           enable = true;
           formatOnSave = true;
