@@ -1,10 +1,10 @@
 {
   pkgs,
-  lib,
-  config,
   inputs,
   ...
-}: {
+}: let
+  hyprland_package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   home.packages = with pkgs; [
     killall
     brightnessctl
@@ -12,14 +12,10 @@
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = hyprland_package.hyprland;
+    portalPackage = hyprland_package.xdg-desktop-portal-hyprland;
     settings = {
-      "exec-once" = "/etc/nixos/modules/desktop-environment/scripts/exec-once.sh";
-      "$menu" = "/etc/nixos/modules/desktop-environment/scripts/menu.sh";
-      "$toggle-fullscreen" = "/etc/nixos/modules/desktop-environment/scripts/toggle-fullscreen";
-      #"monitor" = ",highrr,auto,auto";
-      "monitor" = ["eDP-1,2560x1600@165,0x0,1.6" "DP-9,1920x1080@144,2560x0,1"];
+      "monitor" = ["eDP-1, 2560x1600@165 , 0x0, 1.6, cm, hdr" "DP-9,1920x1080@144,2560x0,1"];
       "$mainMod" = "SUPER";
       general = {
         "allow_tearing" = "false";
@@ -32,6 +28,13 @@
       };
       debug = {
         "disable_logs" = "true";
+      };
+      render = {
+        "direct_scanout" = "1";
+        "cm_fs_passthrough" = "0";
+      };
+      quirks = {
+        "prefer_hdr" = "1";
       };
       input = {
         "kb_layout" = "us";
@@ -51,5 +54,4 @@
       };
     };
   };
-  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
 }

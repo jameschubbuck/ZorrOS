@@ -46,7 +46,9 @@
       shellAliases = {
         "v" = "vi";
         "c" = "cat";
-        "ls" = "lsd";
+        "ls" = "lsd --ignore-glob='__pycache__' --ignore-glob='*.lock'";
+        "tree" = "tree -I '__pycache__|*.lock'";
+        "nix-shell" = "nix-shell --command 'fish'";
       };
     };
   };

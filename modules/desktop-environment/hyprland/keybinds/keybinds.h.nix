@@ -5,6 +5,7 @@
         "G, exec, ghostty"
         "H, exec, helium --password-store=basic"
         "Super_L, exec, rofi -show drun"
+        "TAB, exec, rofi -show window"
         "Q, killactive"
         "F, exec, hyprctl dispatch fullscreenstate 2 0"
         "Escape, exec, hyprlock"

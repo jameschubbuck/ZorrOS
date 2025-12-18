@@ -14,11 +14,4 @@
   fonts.packages = with pkgs; [
     nerd-fonts.geist-mono
   ];
-  environment = {
-    systemPackages = with pkgs; [
-      brightnessctl
-      adwaita-icon-theme
-    ];
-  };
-  programs.bash.loginShellInit = "start-hyprland";
 }

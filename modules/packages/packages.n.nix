@@ -16,6 +16,10 @@
     inkscape # Vector editor
     geary # Gnome email
     bc # Basic calculator
+    adwaita-icon-theme # Icon
+    mpv
+    vlc
+    ffmpeg
   ];
   programs.adb.enable = true;
   services.gvfs.enable = true; # Nautilus trash support
