@@ -15,7 +15,10 @@ in {
     package = hyprland_package.hyprland;
     portalPackage = hyprland_package.xdg-desktop-portal-hyprland;
     settings = {
-      "monitor" = ["eDP-1, 2560x1600@165 , 0x0, 1.6, cm, hdr" "DP-9,1920x1080@144,2560x0,1"];
+      "monitor" = [
+        "eDP-1, 2560x1600@165, 0x0, 1.6"
+        "DP-9, 1920x1080@144,2560x0,1"
+      ];
       "$mainMod" = "SUPER";
       general = {
         "allow_tearing" = "false";

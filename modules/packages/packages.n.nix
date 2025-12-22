@@ -20,6 +20,7 @@
     mpv
     vlc
     ffmpeg
+    prismlauncher
   ];
   programs.adb.enable = true;
   services.gvfs.enable = true; # Nautilus trash support

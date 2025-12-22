@@ -20,7 +20,7 @@
     };
     hyprland.url = "github:hyprwm/Hyprland";
     helium = {
-      url = "github:AlvaroParker/helium-nix";
+      url = "github:vikingnope/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
