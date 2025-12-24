@@ -4,6 +4,7 @@
     tree
     grc
     ripgrep
+    wl-clipboard-rs
   ];
   programs = {
     fish = {
@@ -45,10 +46,16 @@
       ];
       shellAliases = {
         "v" = "vi";
-        "c" = "cat";
         "ls" = "lsd --ignore-glob='__pycache__' --ignore-glob='*.lock'";
         "tree" = "tree -I '__pycache__|*.lock'";
         "nix-shell" = "nix-shell --command 'fish'";
+      };
+      functions = {
+        c = {
+          body = ''
+            cat $argv | wl-copy
+          '';
+        };
       };
     };
   };
