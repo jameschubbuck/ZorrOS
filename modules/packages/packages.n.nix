@@ -10,7 +10,7 @@
     qbittorrent #
     unar # Archive manager
     gimp # Image editor
-    bottles # Wine prefix manager
+    (bottles.override {removeWarningPopup = true;}) # Wine prefix manager
     mangohud # System info viewer
     libnotify # Send notifications
     inkscape # Vector editor
@@ -22,8 +22,8 @@
     ffmpeg
     prismlauncher
     librepods
+    android-tools
   ];
-  programs.adb.enable = true;
   programs.steam.enable = true;
   nixpkgs.config.allowUnfree = true;
   services.gvfs.enable = true; # Nautilus trash support
