@@ -13,5 +13,6 @@ in {
     enable = true;
     # image = wallpaper;
     base16Scheme = theme;
+    targets.plymouth.enable = false;
   };
 }
