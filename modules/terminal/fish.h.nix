@@ -51,6 +51,8 @@
         "tree" = "tree -I '__pycache__|*.lock'";
         "nix-shell" = "nix-shell --command 'fish'";
         "librepods" = "/etc/nixos/modules/packages/librepods.sh";
+        "oc" = "opencode";
+        "logout" = "loginctl terminate-user $USER";
       };
       functions = {
         c = {
