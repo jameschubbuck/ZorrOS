@@ -15,7 +15,14 @@
         enableTreesitter = true;
         enableExtraDiagnostics = true;
         nix.enable = true;
-        markdown.enable = true;
+        markdown = {
+          enable = true;
+          extensions.markview-nvim.enable = true;
+        };
+        ts.enable = true;
+        html.enable = true;
+        tailwind.enable = true;
+        rust.enable = true;
       };
       visuals = {
         highlight-undo.enable = true;
@@ -31,16 +38,12 @@
         nvim-cmp.enable = true;
       };
       snippets.luasnip.enable = true;
-
       treesitter.context.enable = true;
-
       telescope.enable = true;
-
       git = {
         enable = true;
         gitsigns.enable = true;
       };
-
       utility = {
         diffview-nvim.enable = true;
         motion = {
@@ -48,7 +51,6 @@
           leap.enable = true;
         };
       };
-
       comments = {
         comment-nvim.enable = true;
       };

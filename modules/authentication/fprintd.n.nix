@@ -1,11 +1,9 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-
-  services.fprintd.enable = true;
-  services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+{pkgs, ...}: {
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
+    };
+  };
 }
