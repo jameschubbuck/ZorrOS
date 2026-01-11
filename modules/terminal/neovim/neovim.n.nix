@@ -20,6 +20,7 @@
           extensions.markview-nvim.enable = true;
         };
         ts.enable = true;
+        clang.enable = true;
         html.enable = true;
         tailwind.enable = true;
         rust.enable = true;
