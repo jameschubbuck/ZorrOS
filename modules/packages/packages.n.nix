@@ -33,4 +33,5 @@
     "A+ /var/lib/bluetooth - - - - u:james:rx"
   ];
   services.mullvad-vpn.enable = true;
+  programs.nix-ld.enable = true;
 }
