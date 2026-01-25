@@ -14,11 +14,9 @@
     mangohud # System info viewer
     libnotify # Send notifications
     inkscape # Vector editor
-    geary # Gnome email
     bc # Basic calculator
     adwaita-icon-theme # Icons
     mpv # Media player
-    vlc
     ffmpeg
     librepods
     android-tools
@@ -27,11 +25,9 @@
   ];
   programs.steam.enable = true;
   nixpkgs.config.allowUnfree = true;
-  services.gvfs.enable = true; # Nautilus trash support
-  # librepods path stuff
+  services.gvfs.enable = true;
   systemd.tmpfiles.rules = [
     "A+ /var/lib/bluetooth - - - - u:james:rx"
   ];
   services.mullvad-vpn.enable = true;
-  programs.nix-ld.enable = true;
 }
