@@ -1,13 +1,13 @@
-{
+{zorrOS, ...}: {
   programs = {
     ghostty = {
       enable = true;
       enableFishIntegration = true;
       settings = {
-        window-padding-x = 0;
-        window-padding-y = 0;
+        window-padding-x = zorrOS.padding;
+        window-padding-y = zorrOS.padding;
         command = "fish";
-        gtk-titlebar-hide-when-maximized = true;
+        background-opacity = zorrOS.opacity;
       };
     };
   };

@@ -35,18 +35,16 @@
     helium,
   } @ inputs: let
     lib = nixpkgs.lib;
-
-    allModuleFiles = lib.filesystem.listFilesRecursive ./modules;
-
-    mkModuleList = type: map import (lib.filter (path: lib.hasInfix type (toString path)) allModuleFiles);
-
-    homeManagerModuleConfigs = mkModuleList ".h.";
-
-    nixosModuleConfigs = mkModuleList ".n.";
+    zorrOS = import ./zorros.nix;
+    moduleFiles = lib.filesystem.listFilesRecursive ./modules;
+    modules = type: map import (lib.filter (path: lib.hasInfix type (toString path)) moduleFiles);
+    homeManagerModuleConfigs = modules ".h.";
+    nixosModuleConfigs = modules ".n.";
   in {
     nixosConfigurations = {
       ares = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit inputs zorrOS;};
         modules =
           nixosModuleConfigs
           ++ [
@@ -59,7 +57,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {inherit inputs;};
+                extraSpecialArgs = {inherit inputs zorrOS;};
                 users.james = {
                   imports = homeManagerModuleConfigs;
                 };
@@ -70,7 +68,6 @@
             nvf.nixosModules.default
             stylix.nixosModules.stylix
           ];
-        specialArgs = {inherit inputs;};
       };
     };
   };

@@ -1,14 +1,13 @@
 {
-  config,
-  lib,
   pkgs,
+  zorrOS,
   ...
 }: {
   config = {
     programs.opencode = {
       enable = true;
       settings = {
-        theme = "catppuccin-macchiato";
+        theme = zorrOS.theme;
       };
     };
     home.packages = [pkgs.libnotify];
