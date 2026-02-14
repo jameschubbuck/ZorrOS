@@ -1,5 +1,5 @@
 {
-  description = "Personal NixOS configuration";
+  description = "ZorrOS configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager = {
@@ -58,7 +58,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {inherit inputs zorrOS;};
-                users.james = {
+                users.${zorrOS.username} = {
                   imports = homeManagerModuleConfigs;
                 };
               };

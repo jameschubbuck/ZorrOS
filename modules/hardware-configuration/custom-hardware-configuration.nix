@@ -20,4 +20,5 @@
       touchpad.disableWhileTyping = false;
     };
   };
+  hardware.graphics.enable = true;
 }

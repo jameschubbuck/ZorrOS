@@ -14,6 +14,24 @@
         for _, group in ipairs(groups) do
           vim.api.nvim_set_hl(0, group, { bg = "none", ctermbg = "none" })
         end
+
+        require('telescope').setup({
+          defaults = {
+            layout_strategy = 'horizontal',
+            layout_config = {
+              width = 0.99,
+              height = 0.99,
+            },
+          },
+        })
+
+        vim.api.nvim_create_autocmd("VimEnter", {
+          callback = function()
+            if vim.fn.argc() == 0 then
+              require("telescope.builtin").find_files()
+            end
+          end,
+        })
       '';
       spellcheck = {
         enable = true;
@@ -31,7 +49,6 @@
         markdown.enable = true;
         ts.enable = true;
         clang.enable = true;
-        html.enable = true;
         tailwind.enable = true;
         rust.enable = true;
       };

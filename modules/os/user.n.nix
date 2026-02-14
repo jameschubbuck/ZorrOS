@@ -1,5 +1,5 @@
-{
-  users.users.james = {
+{zorrOS, ...}: {
+  users.users.${zorrOS.username} = {
     isNormalUser = true;
     extraGroups = ["networkmanager" "wheel"];
   };

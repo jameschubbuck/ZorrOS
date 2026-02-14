@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     keepassxc # Password manager
     qbittorrent #
@@ -6,7 +10,6 @@
     gimp # Image editor
     (bottles.override {removeWarningPopup = true;}) # Wine prefix manager
     mangohud # System info viewer
-    inkscape # Vector editor
     bc # Basic calculator
     mpv # Media player
     ffmpeg
@@ -16,6 +19,8 @@
     mailspring
     super-slicer
     (callPackage ./betterbird.nix {})
+    (callPackage ./openfoam.nix {})
+    zotero
   ];
   programs.steam.enable = true;
   nixpkgs.config.allowUnfree = true;

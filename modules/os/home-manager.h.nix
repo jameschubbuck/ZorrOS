@@ -1,7 +1,7 @@
-{
+{zorrOS, ...}: {
   home = {
-    username = "james";
-    homeDirectory = "/home/james";
+    username = zorrOS.username;
+    homeDirectory = "/home/${zorrOS.username}";
     stateVersion = "25.05";
   };
   programs.home-manager.enable = true;

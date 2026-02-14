@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: let
   hyprland_package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
@@ -31,8 +32,6 @@ in {
   };
   wayland.windowManager.hyprland = {
     enable = true;
-    package = hyprland_package.hyprland;
-    portalPackage = hyprland_package.xdg-desktop-portal-hyprland;
     settings = {
       "monitor" = [
         "eDP-1, 2560x1600@165, 0x0,    1.6, bitdepth, 10, cm, hdr"
