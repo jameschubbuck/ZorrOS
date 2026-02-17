@@ -23,6 +23,8 @@
     (pkgs.callPackage ./monitor-control.nix {})
     pkgs.ddcutil
     zotero
+    bluetui
+    wiremix
   ];
   programs.steam.enable = true;
   nixpkgs.config.allowUnfree = true;

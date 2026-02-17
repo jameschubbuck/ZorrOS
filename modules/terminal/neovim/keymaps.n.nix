@@ -1,28 +1,33 @@
-{
-  programs.nvf.settings.vim.keymaps = [
+{lib, ...}: let
+  mkKeymap = {
+    key,
+    action,
+    mode ? ["n"],
+    silent ? true,
+    desc ? null,
+  }:
     {
+      inherit key action mode silent;
+    }
+    // lib.optionalAttrs (desc != null) {
+      lua = true;
+    };
+
+  keymaps = [
+    (mkKeymap {
       key = "<leader>w";
-      mode = ["n"];
       action = ":w<CR>";
       silent = false;
-    }
-    {
+    })
+    (mkKeymap {
       key = "<leader>q";
-      mode = ["n"];
       action = ":q<CR>";
-      silent = true;
-    }
-    {
+    })
+    (mkKeymap {
       key = "<leader>e";
-      mode = ["n"];
       action = ":Telescope find_files<CR>";
-      silent = true;
-    }
-    {
-      key = "<leader>fml";
-      mode = ["n"];
-      action = ":CellularAutomaton make_it_rain<CR>";
-      silent = true;
-    }
+    })
   ];
+in {
+  programs.nvf.settings.vim.keymaps = keymaps;
 }

@@ -14,6 +14,19 @@
     # Global dictionary to track debounce timers
     timers = {}
 
+    def get_current_value(feature_code):
+        """Queries ddcutil for the current hardware value."""
+        try:
+            # --brief returns: VCP <code;> <type> <current> <max>
+            cmd = ['${pkgs.ddcutil}/bin/ddcutil', 'getvcp', str(feature_code), '--brief']
+            result = subprocess.check_output(cmd, stderr=subprocess.DEVNULL).decode('utf-8')
+            parts = result.split()
+            if len(parts) >= 4:
+                return int(parts[3])
+        except Exception as e:
+            print(f"Warning: Could not read feature {feature_code}: {e}")
+        return 50
+
     def run_ddc_command(feature, value):
         """Helper to actually run the subprocess."""
         cmd = ['${pkgs.ddcutil}/bin/ddcutil', 'setvcp', str(feature), str(int(value))]
@@ -45,18 +58,15 @@
     def load_css():
         """Injects custom CSS for visual refinements."""
         css_provider = Gtk.CssProvider()
-
         css = b"""
         headerbar {
             border-bottom: 1px solid alpha(currentColor, 0.15);
             background-color: @headerbar_bg_color;
             min-height: 46px;
         }
-
         window {
             background-color: @view_bg_color;
         }
-
         .footer-label {
             opacity: 0.4;
             font-size: 0.75rem;
@@ -64,7 +74,6 @@
             margin-bottom: 12px;
         }
         """
-
         css_provider.load_from_data(css)
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
@@ -77,18 +86,15 @@
         row.set_title(title)
         row.set_icon_name(icon_name)
 
-        scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
-        scale.set_value(50)
+        # Sync with hardware on creation
+        current_val = get_current_value(feature_code)
 
-        # --- ALIGNMENT FIX ---
-        # 1. Disable hexpand so it doesn't grow based on available space left by text.
+        scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1)
+        scale.set_value(current_val)
         scale.set_hexpand(False)
-        # 2. Set a fixed width so all sliders are identical in size.
         scale.set_size_request(220, -1)
-        # 3. Align to the END (Right) so they anchor to the right edge.
         scale.set_halign(Gtk.Align.END)
         scale.set_valign(Gtk.Align.CENTER)
-
         scale.add_css_class("accent")
 
         scale.connect('value-changed', on_change, feature_code)
@@ -103,7 +109,6 @@
         return row
 
     def create_footer():
-        """Creates the footer label."""
         label = Gtk.Label(label="Made with ❤️ in California")
         label.add_css_class("footer-label")
         return label
@@ -124,19 +129,14 @@
 
         page = Adw.PreferencesPage()
         group = Adw.PreferencesGroup()
-
-        # Note: Title and Description removed as requested.
-
         page.add(group)
         view.set_content(page)
 
-        # Add Controls
+        # Add Controls (10 = Brightness, 12 = Contrast)
         group.add(create_slider_row("Brightness", "display-brightness-symbolic", 10))
         group.add(create_slider_row("Contrast", "weather-clear-night-symbolic", 12))
 
-        # Add Footer to the bottom bar of the view
         view.add_bottom_bar(create_footer())
-
         win.present()
 
     app = Adw.Application(application_id="com.nixos.monitorcontrol")
